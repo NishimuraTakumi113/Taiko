@@ -24,6 +24,7 @@ public class HitSensor : MonoBehaviour
 
     [SerializeField] private float FindDistance = 1.0f;
     [SerializeField] private float SensorDistance = 0.5f;
+    [SerializeField] private float PerfectDistance;
     
     void Start()
     {
@@ -78,11 +79,11 @@ public class HitSensor : MonoBehaviour
             bool isCorrrct = (ButtonType == type);//正しい譜面が叩かれたか
             if(isCorrrct){
                 //正しい音符が叩かれた場合
-                if(Mathf.Abs(hitNote.transform.position.x - position) <= SensorDistance &&Mathf.Abs(hitNote.transform.position.x - position) > SensorDistance/4){
+                if(Mathf.Abs(hitNote.transform.position.x - position) <= SensorDistance &&Mathf.Abs(hitNote.transform.position.x - position) > PerfectDistance){
                     hitNote.GetComponent<NotesController>().GoodHit();
                     GoodText.SetActive(true);
 
-                }else if(Mathf.Abs(hitNote.transform.position.x - position) <= SensorDistance/4){
+                }else if(Mathf.Abs(hitNote.transform.position.x - position) <= PerfectDistance){
                     hitNote.GetComponent<NotesController>().PerfectHit();
                     PerfectText.SetActive(true);
                 }else{

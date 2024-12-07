@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameScore
 {
@@ -43,28 +44,29 @@ public class GameScore
 public class GameMode{
     public static bool isPlay = false;
     public static bool isEdit = false;
+    public static bool isReset = false;
 }
 
 public class EditorMelody{
-    public static string melodyName;
-    public static float melodyBPM;
+    public static string melodyName;//
+    public static float melodyBPM;//
     //編集中のメロディの長さ
-    public static float melodyLength;
+    public static float melodyLength;//
 
     //編集中のメロディのスピード
-    public static float melodySpeed;
+    public static float melodySpeed;//
 
     //編集中の現在のスクロール位置
     public static float scrollPoint;
 
     //編集中の表示のためのオフセット
-    public static Vector3 tmpOffset;
+    public static Vector3 tmpOffset;//
 
     //編集中のノーツの位置のリスト
-    public static List<float> notesLocate;
+    public static List<float> notesLocate;//
 
     //編集中のノーツのリスト
-    public static List<int> notesList;
+    public static List<int> notesList;//
 
     //初期化
     public static void Reset()
@@ -72,6 +74,7 @@ public class EditorMelody{
         melodyLength = 0;
         melodySpeed = 1.0f;
         scrollPoint = 0;
+        notesLocate = new List<float>();
     }
 }
 

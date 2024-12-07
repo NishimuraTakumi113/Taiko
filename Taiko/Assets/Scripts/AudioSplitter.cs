@@ -11,6 +11,7 @@ public class AudioSplitter : MonoBehaviour
     public GameObject fourSpritPrefab;//4分割のプレハブ
     public GameObject eightSpritPrefab;//8分割のプレハブ
     public GameObject sixteenSpritPrefab;//16分割のプレハブ
+    public GameObject[] notesPrefab;//ノーツのプレハブ
 
     public float spritNum = 16.0f;
     public Vector3 offset = new Vector3(0, 0, 0); // 分割点のオフセット
@@ -19,12 +20,13 @@ public class AudioSplitter : MonoBehaviour
     private List<int> notesList = new List<int>();// ノーツのリスト
     public float spanLength = 1.0f;
 
-    void Start()
+    public void StartEdit()
     {
+        GameMode.isReset = false;
         EditorMelody.Reset();
         EditorMelody.tmpOffset = offset;
-        EditorMelody.melodyBPM = bpm;
-        EditorMelody.melodyName = audioSource.clip.name;
+        // EditorMelody.melodyBPM = bpm;
+        // EditorMelody.melodyName = audioSource.clip.name;
         if (audioSource != null && audioSource.clip != null)
         {
             // 曲の長さを取得(補正込み)
@@ -36,7 +38,7 @@ public class AudioSplitter : MonoBehaviour
 
 
             // 1拍の長さを計算
-            float beatDuration = 60f / bpm;
+            float beatDuration = 60f / EditorMelody.melodyBPM;
 
             // 1小節の長さを計算（例: 4拍分）
             float segmentDuration = beatDuration * beatsPerSegment;
@@ -48,17 +50,17 @@ public class AudioSplitter : MonoBehaviour
             // }
 
             //細分分音符までの位置を計算
-            for (float time = 0; time < songLength + segmentDuration; time += segmentDuration/spritNum)
+            float time = 0;
+            for (float i = 0; i < EditorMelody.notesList.Count; i++)
             {
-                notesLocateList.Add(time*spanLength);
-                notesList.Add(0);
+                EditorMelody.notesLocate.Add(time * spanLength);
+                time += segmentDuration/spritNum;
             }
-
-            EditorMelody.notesLocate = notesLocateList;
-            EditorMelody.notesList = notesList;
+            Debug.Log(EditorMelody.notesList.Count);
+            Debug.Log(EditorMelody.notesLocate.Count);
         }
 
-        for(int i = 0; i < notesLocateList.Count; i++)
+        for(int i = 0; i < EditorMelody.notesList.Count; i++)
         {
             if(i % spritNum == 0){
                 SetTmpPrefab(splitLinePrefab,i);
@@ -70,16 +72,24 @@ public class AudioSplitter : MonoBehaviour
                 SetTmpPrefab(sixteenSpritPrefab,i);
             }
 
-        // foreach (var point in splitPoints)
-        // {
-        //     GameObject splitLine = Instantiate(splitLinePrefab, new Vector3(point, 0, 1.0f) + offset, Quaternion.identity);
-        //     splitLine.GetComponent<TmpController>().speed = spanLength;
-        // }
+            if(EditorMelody.notesList[i] != 0){
+                SetNotesPrefab(notesPrefab[EditorMelody.notesList[i]-1],i);
+            }
         }
     }
     void SetTmpPrefab(GameObject prefab,int index)
     {
-        GameObject splitLine = Instantiate(prefab, new Vector3(notesLocateList[index], 0, 1.0f) + offset, Quaternion.identity);
+        GameObject splitLine = Instantiate(prefab, new Vector3(EditorMelody.notesLocate[index], 0, 1.0f) + offset, Quaternion.identity);
         splitLine.GetComponent<TmpController>().speed = spanLength;
+        splitLine.GetComponent<TmpController>().pastPosition = splitLine.transform.position;
+    }
+
+    void SetNotesPrefab(GameObject prefab,int index)
+    {
+        GameObject notes = Instantiate(prefab, new Vector3(EditorMelody.notesLocate[index], 0, 1.0f + (float)index/10) + offset, Quaternion.identity);
+        notes.GetComponent<NotesController>().pastPosition = notes.transform.position;
+        notes.GetComponent<NotesController>().speed = EditorMelody.melodySpeed;
+        notes.GetComponent<NotesController>().pastIndex = index;
+        notes.GetComponent<NotesController>().locateIndex = index;
     }
 }

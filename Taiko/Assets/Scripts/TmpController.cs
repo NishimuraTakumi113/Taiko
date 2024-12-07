@@ -5,13 +5,13 @@ using UnityEngine;
 public class TmpController : MonoBehaviour
 {
     public float speed = 1.0f;//テンポバーのスピード
-    private Vector3 pastPosition;//移動前のポジション
-    void Start()
-    {
-        pastPosition = this.transform.position;  
-    }
+    public Vector3 pastPosition;//移動前のポジション
     void Update()
     {
+        if(GameMode.isReset){
+            Destroy(this.gameObject);
+        }
+        
         if(GameMode.isPlay){
             this.transform.position -= new Vector3(speed * Time.deltaTime, 0 , 0);
         // if(this.transform.position.x < -9){

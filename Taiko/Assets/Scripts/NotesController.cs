@@ -9,11 +9,14 @@ public class NotesController : MonoBehaviour
 
     public bool isSelected = false;//編集モードでの選択フラグ
     public Vector3 pastPosition;//移動前のポジション(実際の位置)
-    private int pastIndex = -1;//移動前のインデックス
-    private int locateIndex;//配置されている位置のインデックス
+    public int pastIndex = -1;//移動前のインデックス
+    public int locateIndex;//配置されている位置のインデックス
 
     void Update()
     {
+        if(GameMode.isReset){
+            Destroy(this.gameObject);
+        }
         if(GameMode.isPlay){
             this.transform.position -= new Vector3(speed * Time.deltaTime, 0 , 0);
             if(!GameMode.isEdit){
@@ -34,6 +37,7 @@ public class NotesController : MonoBehaviour
                     if(worldPosition.y >= -1 && worldPosition.y <= 1){
                         worldPosition.y = 0;
                         (float location, int index) = FindLocate(worldPosition.x);
+                        Debug.Log(index);
                         locateIndex = index;
                         worldPosition.x = location - EditorMelody.scrollPoint + EditorMelody.tmpOffset.x;
                     }
@@ -45,14 +49,14 @@ public class NotesController : MonoBehaviour
 
                 if (Input.GetMouseButtonUp(0)){
                     if(this.transform.position.y < -1 || this.transform.position.y > 1){
-                        this.transform.position = pastPosition;
+                        this.transform.position = pastPosition + new Vector3(-EditorMelody.scrollPoint, 0, 0);
                         isSelected = false;
                     }else{
                         if(EditorMelody.notesList[locateIndex] != 0){
                             if(pastIndex == -1){
                                 Destroy(this.gameObject);
                             }
-                            this.transform.position = pastPosition;//既に配置されている場合は元の位置に戻す
+                            this.transform.position = pastPosition + new Vector3(-EditorMelody.scrollPoint, 0, 0);//既に配置されている場合は元の位置に戻す
                         }else{
                             pastPosition = this.transform.position + new Vector3(EditorMelody.scrollPoint, 0, 0);
                             if(pastIndex != -1){
