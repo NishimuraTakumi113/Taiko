@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HitSensor : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class HitSensor : MonoBehaviour
 
     private float position;
     public float offset = 0f;
+
+    //良、可、不可のText
+    [SerializeField] private GameObject PerfectText;
+    [SerializeField] private GameObject GoodText;
+    [SerializeField] private GameObject MissText;
 
 
     public GameObject DonImage;
@@ -22,6 +28,7 @@ public class HitSensor : MonoBehaviour
     void Start()
     {
         position = transform.position.x + offset;
+        DeleteText();
     }
 
     // Update is called once per frame
@@ -30,15 +37,17 @@ public class HitSensor : MonoBehaviour
         hitNote = FindNearestNote();
         if(Input.GetKeyDown(KeyCode.F)||Input.GetKeyDown(KeyCode.J)){
             DonImage.SetActive(true);
-            HitNote(0, hitNote);
+            HitNote(1, hitNote);
         }else if(Input.GetKeyUp(KeyCode.F)||Input.GetKeyUp(KeyCode.J)){
+            DeleteText();
             DonImage.SetActive(false);
         }
 
         if(Input.GetKeyDown(KeyCode.D)||Input.GetKeyDown(KeyCode.K)){
             KaImage.SetActive(true);
-            HitNote(1, hitNote);
+            HitNote(2, hitNote);
         }else if(Input.GetKeyUp(KeyCode.D)||Input.GetKeyUp(KeyCode.K)){
+            DeleteText();
             KaImage.SetActive(false);
         }
     }
@@ -71,26 +80,26 @@ public class HitSensor : MonoBehaviour
                 //正しい音符が叩かれた場合
                 if(Mathf.Abs(hitNote.transform.position.x - position) <= SensorDistance &&Mathf.Abs(hitNote.transform.position.x - position) > SensorDistance/4){
                     hitNote.GetComponent<NotesController>().GoodHit();
+                    GoodText.SetActive(true);
 
                 }else if(Mathf.Abs(hitNote.transform.position.x - position) <= SensorDistance/4){
                     hitNote.GetComponent<NotesController>().PerfectHit();
-                    
+                    PerfectText.SetActive(true);
                 }else{
                     hitNote.GetComponent<NotesController>().MissHit();
+                    MissText.SetActive(true);
                 }
             }else{
                 //間違った音符が叩かれた場合
                 hitNote.GetComponent<NotesController>().MissHit();
+                MissText.SetActive(true);
             }
-            // if(Mathf.Abs(hitNote.transform.position.x - position) <= SensorDistance &&Mathf.Abs(hitNote.transform.position.x - position) > SensorDistance/4){
-            //     hitNote.GetComponent<NotesController>().GoodHit();
-
-            // }else if(Mathf.Abs(hitNote.transform.position.x - position) <= SensorDistance/4){
-            //     hitNote.GetComponent<NotesController>().PerfectHit();
-                
-            // }else{
-            //     hitNote.GetComponent<NotesController>().MissHit();
-            // }
         }
+    }
+
+    private void DeleteText(){
+        PerfectText.SetActive(false);
+        GoodText.SetActive(false);
+        MissText.SetActive(false);
     }
 }

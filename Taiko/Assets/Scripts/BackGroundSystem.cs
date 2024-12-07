@@ -39,3 +39,45 @@ public class GameScore
         totalMaxScore = 0;
     }
 }
+
+public class GameMode{
+    public static bool isPlay = false;
+    public static bool isEdit = false;
+}
+
+public class EditorMelody{
+    public static string melodyName;
+    public static float melodyBPM;
+    //編集中のメロディの長さ
+    public static float melodyLength;
+
+    //編集中のメロディのスピード
+    public static float melodySpeed;
+
+    //編集中の現在のスクロール位置
+    public static float scrollPoint;
+
+    //編集中の表示のためのオフセット
+    public static Vector3 tmpOffset;
+
+    //編集中のノーツの位置のリスト
+    public static List<float> notesLocate;
+
+    //編集中のノーツのリスト
+    public static List<int> notesList;
+
+    //初期化
+    public static void Reset()
+    {
+        melodyLength = 0;
+        melodySpeed = 1.0f;
+        scrollPoint = 0;
+    }
+}
+
+[System.Serializable]
+public class MusicSaveData{
+    public string musicName;
+    public float musicBPM;
+    public List<int> notesList;
+}
