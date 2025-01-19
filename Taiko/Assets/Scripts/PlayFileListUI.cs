@@ -6,14 +6,14 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Networking;
 
-public class EditorFileListUI : MonoBehaviour
+public class PlayFileListUI : MonoBehaviour
 {
     public GameObject AudioPlayer;
     public EditorMusicFileExplorer fileExplorer;
     public Transform buttonParent;
     public GameObject buttonPrefab;
     public GameObject LoadWindow;
-    public EditorMainSystem mainSystem;
+    public PlayMainSystem mainSystem;
 
     void Start()
     {
@@ -57,10 +57,8 @@ public class EditorFileListUI : MonoBehaviour
                 clip.name = fileName;
                 AudioSource audioSource = AudioPlayer.gameObject.GetComponent<AudioSource>();
                 audioSource.clip = clip;
-                if(GameMode.isPlay){
-                }else if(GameMode.isEdit){
-                mainSystem.EditStart();
-                }
+                mainSystem.PlayStart();
+                
             }
         }
     }

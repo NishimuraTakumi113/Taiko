@@ -26,11 +26,7 @@ public class EditorAudioPlayer : MonoBehaviour
     }
 
     public void PlayMelody()
-    {
-        if(!GameMode.isEdit){
-            return;
-        }
-        
+    {   
         if(melodySource.isPlaying){
             melodySource.Pause();
             hasStarted = false;
