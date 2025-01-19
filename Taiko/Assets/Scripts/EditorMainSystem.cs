@@ -46,7 +46,6 @@ public class EditorMainSystem : MonoBehaviour
         EditorMelody.melodyName = saveData.musicName;
         EditorMelody.melodyBPM = saveData.musicBPM;
         EditorMelody.notesList = saveData.notesList;
-        Debug.Log(saveData.notesList[0]);
         audioSplitter.StartEdit();
         } 
 

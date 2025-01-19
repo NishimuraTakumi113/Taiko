@@ -12,7 +12,6 @@ public class EditorAudioPlayer : MonoBehaviour
     void Start()
     {
         startTime = 0;
-        melodySource.Stop();
         if(playButton != null){
             playButton.onClick.AddListener(PlayMelody);
         }
@@ -20,7 +19,7 @@ public class EditorAudioPlayer : MonoBehaviour
     void Update()
     {
         startTime = EditorMelody.scrollPoint/EditorMelody.melodySpeed;
-        if(hasStarted && !melodySource.isPlaying){
+        if(!hasStarted && melodySource.isPlaying){
             hasStarted = false;
             playButton.GetComponent<EditorPlay>().OnButtonClicked();
         }
