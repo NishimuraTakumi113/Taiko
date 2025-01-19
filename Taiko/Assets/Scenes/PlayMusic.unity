@@ -844,6 +844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 377038492}
   - component: {fileID: 377038491}
+  - component: {fileID: 377038493}
   m_Layer: 0
   m_Name: MainSystem (1)
   m_TagString: Untagged
@@ -858,7 +859,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377038490}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05f0d039c846a8b4b9f3a88c32b5b595, type: 3}
   m_Name: 
@@ -866,7 +867,7 @@ MonoBehaviour:
   wheelSpeed: 10
   TimerText: {fileID: 1017764936}
   melodyScrollBar: {fileID: 713865717}
-  audioSplitter: {fileID: 1288083937}
+  audioSplitter: {fileID: 0}
   editorAudioPlayer: {fileID: 1056911759}
 --- !u!4 &377038492
 Transform:
@@ -883,6 +884,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &377038493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377038490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db46a9249d0fab44ab8d99aedde781f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelSpeed: 10
+  TimerText: {fileID: 1017764936}
+  melodyScrollBar: {fileID: 713865717}
+  audioSplitter: {fileID: 1288083939}
+  editorAudioPlayer: {fileID: 1056911759}
 --- !u!1 &394359175
 GameObject:
   m_ObjectHideFlags: 0
@@ -2263,6 +2281,7 @@ GameObject:
   - component: {fileID: 1078146174}
   - component: {fileID: 1078146176}
   - component: {fileID: 1078146175}
+  - component: {fileID: 1078146177}
   m_Layer: 0
   m_Name: Mp3FilesFolder
   m_TagString: Untagged
@@ -2296,7 +2315,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078146173}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97864c176b85e744e8aa14668d20944d, type: 3}
   m_Name: 
@@ -2331,6 +2350,24 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &1078146177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078146173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82732124a38880d4e9c350e7bde7db61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioPlayer: {fileID: 1056911758}
+  fileExplorer: {fileID: 301048476}
+  buttonParent: {fileID: 1078146174}
+  buttonPrefab: {fileID: 8250876888235247300, guid: f73f3826abd75e749816961852cc7317, type: 3}
+  LoadWindow: {fileID: 515027122}
+  mainSystem: {fileID: 377038493}
 --- !u!1 &1101009898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2699,7 +2736,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1288083938}
-  - component: {fileID: 1288083937}
+  - component: {fileID: 1288083939}
   m_Layer: 0
   m_Name: AudioSplitter
   m_TagString: Untagged
@@ -2707,31 +2744,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1288083937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1288083936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23cb73d9f9c8a3f47b02f6a8ad8b82e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 1056911760}
-  bpm: 180
-  beatsPerSegment: 4
-  splitLinePrefab: {fileID: 5157590254919708589, guid: 78a0202b9a83cee4192cb08c4c657255, type: 3}
-  fourSpritPrefab: {fileID: 5157590254919708589, guid: a0f43f019e338d34298dc792fc2267cb, type: 3}
-  eightSpritPrefab: {fileID: 5157590254919708589, guid: ec2c97f8242b8db4992bdc1c8c0ccfb0, type: 3}
-  sixteenSpritPrefab: {fileID: 5157590254919708589, guid: 5b68b71b75606f04383d04b0473d99c0, type: 3}
-  notesPrefab:
-  - {fileID: 7934570514070165487, guid: 753dba71452bb8d4e89c399abd083997, type: 3}
-  - {fileID: 1465980466373517147, guid: e9ade25a3d04966449836f376416656e, type: 3}
-  spritNum: 16
-  offset: {x: -6, y: 0, z: 0}
-  spanLength: 5
 --- !u!4 &1288083938
 Transform:
   m_ObjectHideFlags: 0
@@ -2747,6 +2759,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1288083939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288083936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ae74deb6663f348a43a75024a0a991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 1056911760}
+  bpm: 180
+  beatsPerSegment: 4
+  splitLinePrefab: {fileID: 5157590254919708589, guid: 78a0202b9a83cee4192cb08c4c657255, type: 3}
+  notesPrefab:
+  - {fileID: 7934570514070165487, guid: 753dba71452bb8d4e89c399abd083997, type: 3}
+  - {fileID: 1465980466373517147, guid: e9ade25a3d04966449836f376416656e, type: 3}
+  spritNum: 16
+  offset: {x: -6, y: 0, z: 0}
+  spanLength: 5
 --- !u!1 &1320706006
 GameObject:
   m_ObjectHideFlags: 0
