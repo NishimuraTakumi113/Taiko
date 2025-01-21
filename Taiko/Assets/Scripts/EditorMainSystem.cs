@@ -27,6 +27,8 @@ public class EditorMainSystem : MonoBehaviour
         wheelDistance = 0;
         melodyScrollBar.value = 0;
         GameMode.isEdit = false;
+        GameMode.isPlay = false;
+        GameMode.isEdit = true;
     }
 
     public async void EditStart(){
