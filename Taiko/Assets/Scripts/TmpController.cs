@@ -13,11 +13,14 @@ public class TmpController : MonoBehaviour
         }
         
         if(GameMode.isPlay){
-            this.transform.position -= new Vector3(speed * Time.deltaTime, 0 , 0);
-        // if(this.transform.position.x < -9){
-        //         MissHit();
-        //         Destroy(this.gameObject);
-        // }
+            if(GameMode.isEdit){
+                this.transform.position -= new Vector3(speed * Time.deltaTime, 0 , 0);
+            }else{
+                this.transform.position -= new Vector3(speed * Time.deltaTime, 0 , 0);
+                if(this.transform.position.x < -9){
+                    Destroy(this.gameObject);
+                }
+            }
         }else{
             transform.position = pastPosition + new Vector3(-EditorMelody.scrollPoint, 0, 0);
         }
