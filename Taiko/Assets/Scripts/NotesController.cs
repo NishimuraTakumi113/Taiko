@@ -37,7 +37,7 @@ public class NotesController : MonoBehaviour
                     if(worldPosition.y >= -1 && worldPosition.y <= 1){
                         worldPosition.y = 0;
                         (float location, int index) = FindLocate(worldPosition.x);
-                        Debug.Log(index);
+                        // Debug.Log(index);
                         locateIndex = index;
                         worldPosition.x = location - EditorMelody.scrollPoint + EditorMelody.tmpOffset.x;
                     }

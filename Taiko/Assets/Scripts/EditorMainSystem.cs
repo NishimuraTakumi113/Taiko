@@ -19,6 +19,7 @@ public class EditorMainSystem : MonoBehaviour
     //各システムの初期化のための各スクリプトの取得
     public AudioSplitter audioSplitter;
     public EditorAudioPlayer editorAudioPlayer;
+    private string targetMusicDirectoryPath;
 
     void Start()
     {
@@ -31,13 +32,15 @@ public class EditorMainSystem : MonoBehaviour
         GameMode.isEdit = true;
     }
 
-    public async void EditStart(){
+    public async void EditStart(string musicName){
         wheelDistance = 0;
         melodyScrollBar.value = 0;
         GameMode.isReset = true;
         // 楽曲の情報を取得
-        directoryPath = Path.Combine(Application.persistentDataPath, "MusicData");
-        filePath = Path.Combine(directoryPath, editorAudioPlayer.melodySource.clip.name + ".json");
+        targetMusicDirectoryPath = Path.Combine(Application.persistentDataPath, "MusicList");
+        directoryPath = Path.Combine(targetMusicDirectoryPath, musicName);
+        string[] filePaths = Directory.GetFiles(directoryPath, "*.json");
+        filePath = filePaths[0];
         MusicSaveData saveData = LoadMusicData();
         if(saveData == null){
             return;

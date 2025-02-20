@@ -84,3 +84,21 @@ public class MusicSaveData{
     public float musicBPM;
     public List<int> notesList;
 }
+
+public class TmpData{
+    public static string musicFilePath;
+    public static float musicLength;
+    public static List<int> defaultNotesList(float bpm, float songLength){
+        //1拍の長さを計算
+        float beatDuration = 60f / bpm;
+        //1小節の長さを計算（例: 4拍分）
+        float segmentDuration = beatDuration * 4;
+        //16分音符までのノーツリストを作成
+        List<int> notesList = new List<int>();
+        for (float time = 0; time < songLength + segmentDuration; time += segmentDuration / 16)
+        {
+            notesList.Add(0);
+        }
+        return notesList;
+    }
+}

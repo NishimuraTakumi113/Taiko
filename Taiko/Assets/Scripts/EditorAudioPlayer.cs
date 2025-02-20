@@ -18,7 +18,18 @@ public class EditorAudioPlayer : MonoBehaviour
     }
     void Update()
     {
+        
         startTime = EditorMelody.scrollPoint/EditorMelody.melodySpeed;
+        
+        // Space キーでボタンを押す
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (playButton != null)
+            {
+                playButton.onClick.Invoke();  // ボタンのクリックイベントを発火
+            }
+        }
+        
         if(!hasStarted && melodySource.isPlaying){
             hasStarted = false;
             playButton.GetComponent<EditorPlay>().OnButtonClicked();

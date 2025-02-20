@@ -11,12 +11,15 @@ public class EditorSaveManager : MonoBehaviour
     public void Save(){
         //ディレクトリのパス
         directoryPath = Path.Combine(Application.persistentDataPath, "MusicData");
+        //ディレクトリが存在しない場合
+        CreateDirectoryIfNeeded();
 
         //ファイルの保存先
         filePath = Path.Combine(directoryPath, EditorMelody.melodyName + ".json");
-
-        //ディレクトリが存在しない場合
-        CreateDirectoryIfNeeded();
+        if(!File.Exists(filePath)){
+            Debug.Log("ファイルが存在しません" + filePath);
+            return;
+        }
 
         //データの作成
         MusicSaveData saveData = new MusicSaveData{
@@ -27,8 +30,24 @@ public class EditorSaveManager : MonoBehaviour
 
         //データの保存
         SaveMusicData(saveData);
-
     }
+
+    // public static void Save(MusicSaveData saveData){
+    //     //ディレクトリのパス
+    //     private string directoryPath = Path.Combine(Application.persistentDataPath, "MusicData");
+    //     //ディレクトリが存在しない場合
+    //     CreateDirectoryIfNeeded();
+
+    //     //ファイルの保存先
+    //     filePath = Path.Combine(directoryPath, saveData.musicName + ".json");
+    //     if(!File.Exists(filePath)){
+    //         Debug.Log("ファイルが存在しません" + filePath);
+    //         return;
+    //     }
+
+    //     //データの保存
+    //     SaveMusicData(saveData);
+    // }
 
     void CreateDirectoryIfNeeded()
     {

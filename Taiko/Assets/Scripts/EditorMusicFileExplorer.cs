@@ -6,18 +6,18 @@ using System.IO;
 public class EditorMusicFileExplorer : MonoBehaviour
 {
     private string musicFilePath;
-    private string[] mp3Files;
+    private string[] MusicFiles;
 
     void Start(){
-        musicFilePath = Path.Combine(Application.persistentDataPath, "Music");
+        musicFilePath = Path.Combine(Application.persistentDataPath, "MusicList");
         if(Directory.Exists(musicFilePath)){
-            mp3Files = Directory.GetFiles(musicFilePath,"*.mp3");
+            MusicFiles = Directory.GetDirectories(musicFilePath);
         }else{
-            Debug.Log("フォルダが存在しません");
+            Debug.Log("楽曲が存在しません");
         }
     }
 
     public string[] GetMps3Files(){
-        return mp3Files;
+        return MusicFiles;
     }
 }
