@@ -2819,7 +2819,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &747830968
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2904,14 +2904,14 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
+  m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!1 &750138808
 GameObject:
@@ -3749,6 +3749,7 @@ MonoBehaviour:
   musicNameText: {fileID: 508641377}
   musicBPMText: {fileID: 263612523}
   Alert: {fileID: 484494638}
+  mainSystem: {fileID: 1476251360}
 --- !u!1 &993976533
 GameObject:
   m_ObjectHideFlags: 0
@@ -4284,6 +4285,7 @@ MonoBehaviour:
   buttonPrefab: {fileID: 8250876888235247300, guid: f73f3826abd75e749816961852cc7317, type: 3}
   LoadWindow: {fileID: 129589519}
   mainSystem: {fileID: 1476251360}
+  AddScreen: {fileID: 747830971}
 --- !u!1 &1183047918
 GameObject:
   m_ObjectHideFlags: 0
@@ -5381,6 +5383,7 @@ GameObject:
   - component: {fileID: 1543519733}
   - component: {fileID: 1543519732}
   - component: {fileID: 1543519731}
+  - component: {fileID: 1543519734}
   m_Layer: 0
   m_Name: Cancel
   m_TagString: Untagged
@@ -5452,9 +5455,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2009143774}
-        m_TargetAssemblyTypeName: FileBrowser, Assembly-CSharp
-        m_MethodName: BuildMusicNotes
+      - m_Target: {fileID: 1543519734}
+        m_TargetAssemblyTypeName: EditorCancelButton, Assembly-CSharp
+        m_MethodName: OnButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5502,6 +5505,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1543519729}
   m_CullTransparentMesh: 1
+--- !u!114 &1543519734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543519729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0d7519a578a51442878fd799d95a7b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AddScreen: {fileID: 747830971}
 --- !u!1 &1571334005
 GameObject:
   m_ObjectHideFlags: 0
@@ -7155,50 +7171,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108180633}
   m_CullTransparentMesh: 1
---- !u!1 &2115570669
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2115570670}
-  - component: {fileID: 2115570671}
-  m_Layer: 0
-  m_Name: SaveManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &2115570670
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2115570669}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2115570671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2115570669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33ae2779a52f4344d9911b27c631cab3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2875198435872684530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7391,5 +7363,4 @@ SceneRoots:
   - {fileID: 2020728424}
   - {fileID: 1476251361}
   - {fileID: 7274343336234259865}
-  - {fileID: 2115570670}
   - {fileID: 501446232}
